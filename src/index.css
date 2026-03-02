@@ -1,0 +1,469 @@
+:root {
+  --ocean-deep: #0a4d68;
+  --ocean-mid: #088395;
+  --ocean-light: #05bfdb;
+  --aqua: #00ffca;
+  --salt-white: #fefefa;
+  --sand-beige: #fef5ed;
+  --glass-white: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --text-main: #0a2647;
+  --text-sub: rgba(10, 38, 71, 0.8);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-main);
+  background:
+    linear-gradient(rgba(254, 245, 237, 0.82), rgba(254, 245, 237, 0.88)),
+    url('/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow: visible;
+}
+
+/* ──────────────────────────────────────────────────────────
+   LOGIN SCREEN ISOLATION
+   Keeping your background and centering restricted to login only
+   ────────────────────────────────────────────────────────── */
+.login-page-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(60px, 10vh, 100px) 20px;
+  background: url('/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.login-page-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: -1;
+}
+
+/* Falling Salt Animation */
+.salt-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.salt-particle {
+  position: absolute;
+  background: white;
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-10vh) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* ============================================================
+   CONTAINER & LAYOUT
+============================================================ */
+/* Particles contained to login */
+.salt-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.salt-particle {
+  position: absolute;
+  background: white;
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-10vh) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+.portal-branding {
+  text-align: center;
+  z-index: 15;
+  width: 100%;
+  animation: fadeInDown 1.2s ease-out both;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.brand-highlight-main {
+  font-size: clamp(2.5rem, 10vw, 6.5rem);
+  font-weight: 950;
+  letter-spacing: clamp(6px, 2vw, 15px);
+  text-transform: uppercase;
+  background: linear-gradient(to bottom, #ffffff 40%, #e0f2fe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.5));
+  margin: 0;
+  line-height: 1;
+}
+
+.brand-subtext {
+  color: white;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  letter-spacing: 0.6em;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-top: 10px;
+  opacity: 0.9;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.login-container-wrapper {
+  z-index: 15;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  animation: fadeUp 1s ease-out both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   LOGIN CARD (GLASSMORPHISM)
+============================================================ */
+.right-panel {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 40px;
+  padding: 50px 40px;
+  box-shadow:
+    0 40px 100px -20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.role-tabs {
+  display: flex;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 5px;
+  border-radius: 100px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.role-tab {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px;
+  border-radius: 100px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.role-tab.active.gold {
+  background: white;
+  color: #0a4d68;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.role-tab.active.green {
+  background: white;
+  color: #088395;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.form-header {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.form-header h2 {
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.form-header p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding-left: 5px;
+}
+
+.input-wrapper {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  height: 60px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.input-wrapper:focus-within {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: white;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.input-wrapper input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 0.95rem;
+}
+
+.input-icon {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 18px;
+  background: white;
+  color: #0a4d68;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 15px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.demo-credentials-box {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 25px;
+  text-align: center;
+}
+
+/* Clean Backdrop System */
+.login-page-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: saturate(1.1);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.taskbar {
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 50;
+  height: 48px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.tb-spacer {
+  flex: 1;
+}
+
+.tb-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.tb-info-sep {
+  opacity: 0.3;
+  color: white;
+  margin: 0 5px;
+}
+
+.tb-time-display {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.tb-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #2ecc71;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tb-app-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ============================================================
+   RESPONSIVE OVERRIDES
+============================================================ */
+@media (max-width: 480px) {
+  .login-page-container {
+    padding: 60px 15px 120px;
+    justify-content: space-between;
+  }
+
+  .right-panel {
+    padding: 30px 20px;
+    border-radius: 24px;
+  }
+
+
+  .brand-highlight-main {
+    letter-spacing: 6px;
+  }
+}
+
+/* Include Dashboard Classes to preserve functionality */
+.app-window {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.window-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 72px;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.app-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.sidebar-item {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 10px;
+}
+
+.sidebar-item.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
